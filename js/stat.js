@@ -1,7 +1,5 @@
 'use strict';
 
-var HEIGHT_PROPORTION = 1.337;
-
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
@@ -14,26 +12,6 @@ var FONT_GAP = 20;
 var FONT_GAP_TOP = 40;
 var barHeight = 150 - FONT_GAP - GAP;
 var BAR_WIDTH = 40;
-
-var fireballSize = 22;
-var wizardSpeed = 3;
-
-var getFireballSpeed = function (left) {
-  return left ? 5 : 2;
-};
-
-var wizardWidth = 70;
-var getWizardHeight = function (wizardWidth) {
-  return HEIGHT_PROPORTION * wizardWidth;
-};
-
-var getWizardX = function (width) {
-  return (width - wizardWidth) / 2;
-};
-
-var getWizardY = function (height) {
-  return height / 3;
-};
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -50,40 +28,40 @@ var getMaxElement = function (arr) {
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(
-    x,
-    y,
-    CLOUD_WIDTH,
-    CLOUD_HEIGHT
+      x,
+      y,
+      CLOUD_WIDTH,
+      CLOUD_HEIGHT
   );
 };
 
 window.renderStatistics = function (ctx, names, times) {
 
   renderCloud(
-    ctx,
-    CLOUD_X + GAP,
-    CLOUD_Y + GAP,
-    'rgba(0, 0, 0, 0.7)'
+      ctx,
+      CLOUD_X + GAP,
+      CLOUD_Y + GAP,
+      'rgba(0, 0, 0, 0.7)'
   );
   renderCloud(
-    ctx,
-    CLOUD_X,
-    CLOUD_Y,
-    '#fff'
+      ctx,
+      CLOUD_X,
+      CLOUD_Y,
+      '#fff'
   );
 
   ctx.fillStyle = '#000';
 
   ctx.font = '16px PT Mono';
   ctx.fillText(
-    'Ура вы победили!',
-    CLOUD_X + GAP,
-    CLOUD_Y + FONT_GAP_TOP
+      'Ура вы победили!',
+      CLOUD_X + GAP,
+      CLOUD_Y + FONT_GAP_TOP
   );
   ctx.fillText(
-    'Список результатов:',
-    CLOUD_X + GAP,
-    CLOUD_Y + FONT_GAP_TOP + FONT_GAP
+      'Список результатов:',
+      CLOUD_X + GAP,
+      CLOUD_Y + FONT_GAP_TOP + FONT_GAP
   );
 
   var maxTime = getMaxElement(times);
@@ -92,9 +70,9 @@ window.renderStatistics = function (ctx, names, times) {
     var currentChartHeight = (barHeight * times[i]) / maxTime;
 
     ctx.fillText(
-      Math.round(times[i]),
-      CLOUD_X + CHART_GAP_LEFT + (BAR_WIDTH + COLUMN_GAP) * i,
-      CLOUD_Y + CHART_GAP_TOP + (barHeight - currentChartHeight) - GAP
+        Math.round(times[i]),
+        CLOUD_X + CHART_GAP_LEFT + (BAR_WIDTH + COLUMN_GAP) * i,
+        CLOUD_Y + CHART_GAP_TOP + (barHeight - currentChartHeight) - GAP
     );
 
     //  Color for current chart
@@ -104,19 +82,19 @@ window.renderStatistics = function (ctx, names, times) {
     }
 
     ctx.fillRect(
-      CLOUD_X + CHART_GAP_LEFT + (BAR_WIDTH + COLUMN_GAP) * i,
-      CLOUD_Y + CHART_GAP_TOP + (barHeight - currentChartHeight),
-      BAR_WIDTH,
-      currentChartHeight
+        CLOUD_X + CHART_GAP_LEFT + (BAR_WIDTH + COLUMN_GAP) * i,
+        CLOUD_Y + CHART_GAP_TOP + (barHeight - currentChartHeight),
+        BAR_WIDTH,
+        currentChartHeight
     );
 
     //  Reset chart color
     ctx.fillStyle = '#000';
 
     ctx.fillText(
-      names[i],
-      CLOUD_X + CHART_GAP_LEFT + (BAR_WIDTH + COLUMN_GAP) * i,
-      CLOUD_Y + CHART_GAP_TOP + barHeight + FONT_GAP
+        names[i],
+        CLOUD_X + CHART_GAP_LEFT + (BAR_WIDTH + COLUMN_GAP) * i,
+        CLOUD_Y + CHART_GAP_TOP + barHeight + FONT_GAP
     );
   }
 };
