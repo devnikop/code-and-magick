@@ -57,12 +57,11 @@ var randomSwapFullName = function (firstName, lastName) {
 var createWizards = function (firstNames, lastNames, coatColors, eyesColors) {
   var wizards = [];
   for (var i = 0; i < 4; i++) {
-    var wizard = {};
-    wizard.firstName = pickRandomValue(firstNames);
-    wizard.lastName = pickRandomValue(lastNames);
-    wizard.fullName = randomSwapFullName(wizard.firstName, wizard.lastName);
-    wizard.coatColor = pickRandomValue(coatColors);
-    wizard.eyesColor = pickRandomValue(eyesColors);
+    var wizard = {
+      name: randomSwapFullName(pickRandomValue(firstNames), pickRandomValue(lastNames)),
+      coatColor: pickRandomValue(coatColors),
+      eyesColor: pickRandomValue(eyesColors)
+    };
 
     wizards[i] = wizard;
   }
@@ -72,7 +71,7 @@ var createWizards = function (firstNames, lastNames, coatColors, eyesColors) {
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.fullName;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
   return wizardElement;
