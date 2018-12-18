@@ -38,8 +38,8 @@
     for (var i = 0; i < 4; i++) {
       var wizard = {
         name: randomSwapFullName(window.util.pickRandomValue(firstNames), window.util.pickRandomValue(lastNames)),
-        coatColor: window.colorize.getRandomCoatColor(),
-        eyesColor: window.colorize.getRandomEyesColor()
+        coatColor: window.colorize.getRandomColor('coat'),
+        eyesColor: window.colorize.getRandomColor('eyes')
       };
       wizards[i] = wizard;
     }
@@ -65,13 +65,19 @@
 
   var setupPlayerElement = document.querySelector('.setup-player');
   var setupWizardElement = setupPlayerElement.querySelector('.setup-wizard');
-  var wizardCoatElement = setupWizardElement.querySelector('.wizard-coat');
-  var wizardEyesElement = setupWizardElement.querySelector('.wizard-eyes');
-  var fireballWrapElement = setupPlayerElement.querySelector('.setup-fireball-wrap');
 
-  wizardCoatElement.addEventListener('click', window.colorize.changeWizardCoatColor.bind(null, setupPlayerElement, wizardCoatElement));
-  wizardEyesElement.addEventListener('click', window.colorize.changeWizardEyesColor.bind(null, setupPlayerElement, wizardEyesElement));
-  fireballWrapElement.addEventListener('click', window.colorize.changeWizardFireballColor.bind(null, setupPlayerElement, fireballWrapElement));
+  var wizardCoatElement = setupWizardElement.querySelector('.wizard-coat');
+  var wizardCoatField = setupPlayerElement.querySelector('input[name=coat-color]');
+
+  var wizardEyesElement = setupWizardElement.querySelector('.wizard-eyes');
+  var wizardEyesField = setupPlayerElement.querySelector('input[name=eyes-color]');
+
+  var fireballWrapElement = setupPlayerElement.querySelector('.setup-fireball-wrap');
+  var wizardFireballField = setupPlayerElement.querySelector('input[name=fireball-color]');
+
+  window.colorize.addChangeColorEvent(wizardCoatElement, wizardCoatField, 'coat');
+  window.colorize.addChangeColorEvent(wizardEyesElement, wizardEyesField, 'eyes');
+  window.colorize.addChangeColorEvent(fireballWrapElement, wizardFireballField, 'fireball');
 
 
   var setupSimilarList = document.querySelector('.setup-similar-list');
