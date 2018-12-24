@@ -32,6 +32,10 @@
     document.removeEventListener('keydown', onPopupEscPress);
   };
 
+  var successHandler = function () {
+    closePopup();
+  };
+
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   setupOpen.addEventListener('click', openPopup);
@@ -88,6 +92,12 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+  });
+
+  var setupWizardFormElement = setup.querySelector('.setup-wizard-form');
+  setupWizardFormElement.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(setupWizardFormElement), successHandler, window.util.errorHandler);
   });
 })();
 
